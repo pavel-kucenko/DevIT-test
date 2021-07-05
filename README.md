@@ -138,3 +138,50 @@ let a = arrays.reduce(function(prev, item) {
 });
 
 // → [1, 2, 3, 4, 5, 6]
+```
+
+### Допустим, у вас есть функция primitiveMultiply, которая в 50% случаев перемножает 2 числа, а в остальных случаях выбрасывает исключение типа MultiplicatorUnitFailure. Напишите функцию, обёртывающую эту, и просто вызывающую её до тех пор, пока не будет получен успешный результат.
+```
+function MultiplicatorUnitFailure() {}
+function primitiveMultiply(a, b) {
+  if (Math.random() < 0.5)
+    return a * b;
+  else
+    throw new MultiplicatorUnitFailure();
+}
+function reliableMultiply(a, b) {
+  // Ваш код
+}
+console.log(reliableMultiply(8, 8));
+```
+---
+```
+function MultiplicatorUnitFailure(message) {
+	this.message = message;
+	this.stack = (new Error()).stack;
+}
+ 
+MultiplicatorUnitFailure.prototype = Object.create(Error.prototype);
+ 
+function primitiveMultiply(a, b) {
+	if (Math.random() < 0.5)
+		return a * b;
+	else
+		throw new MultiplicatorUnitFailure("Рандом не на нашей стороне!");
+}
+ 
+function reliableMultiply(a, b) {
+	while(true) {
+		try {
+			return primitiveMultiply(a, b);
+		} catch (e) {
+			if (e instanceof MultiplicatorUnitFailure)
+				console.log(e.message);
+			else
+				throw e;
+		}
+	}
+}
+
+console.log(reliableMultiply(8, 8));
+```
