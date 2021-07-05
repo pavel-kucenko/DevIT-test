@@ -129,3 +129,12 @@ function cloneDeep(dest, obj) {
   return dest;
 }
 ```
+### Свертка. Используйте метод reduce в комбинации с concat для свёртки массива массивов в один массив, у которого есть все элементы входных массивов.
+```
+var arrays = [[1, 2, 3], [4, 5], [6]];
+
+let a = arrays.reduce(function(prev, item) {
+  return prev = prev.concat(item);
+});
+
+// → [1, 2, 3, 4, 5, 6]
