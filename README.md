@@ -50,6 +50,8 @@ find ./var/ -type f -exec cat {} + // Ищем рекурсивно все фа�
         <title>503</title>
     </head>
 </html>
+```
+```
 cat ./var/www/html/503.html << EOF
 <html>
     <head>
