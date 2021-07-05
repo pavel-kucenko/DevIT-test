@@ -85,3 +85,28 @@ git add Readme.md // Добавляем файл в index
 git commit -m “add Readme.md” // Коммитим изменения
 git push -u git@example.com:example/test.git dev // Заливаем изменения на удаленный репозиторий в ветку dev
 ```
+
+##CSS, HTML
+###Опишите все известные вам способы позиционирования 5 элементов по центру, каждый из которых должен занимать 20%.
+--- 
+`Если 5 элементов занимают по 20% ширины родителя, то горизонтальное центрирование им не нужно, они и так растянутся на всю ширину родителя.
+`Для родителя display: flex; justify-content: center; align-items: center; для дочерних элементов flex-basis: 20%; или width: 20%; height: 20%;
+`Горизонтальное центрирование с фиксированной шириной можно сделать через margin: 0 auto;
+`Если inline-block то можно горизонтально центрировать через text-align: center; (убрать пробелы можно задав у родителя font-size: 0;)
+ 
+ 
+### Опишите все известные вам способы позиционирования модального окна, по центру экрана.
+ 
+    Можно центрировать через position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+ 
+### Напишите стили для кнопки, которая может иметь несколько состояний: active, disabled, danger. Цвета произвольные.
+ ```
+# <button class=”btn active”>btn</button>
+  <button class=”btn disabled”>btn</button>
+  <button class=”btn danger”>btn</button>
+.active {background-color: blue}; .disabled {background-color: grey;}; .danger {background-color: red};
+```
+ 
+### Сверстайте страницу логина, которая должна содержать только форму с полями email, password.
+ 
+    https://github.com/pavel-kucenko/login-form
