@@ -318,7 +318,7 @@ function array_pluck(arr, patch) {
   return result;
 }
 ```
-# Создать функцию которая создает объект на основании двух представленных массивов используя один как ключи, а другой как значения. Не подходящие ключи массивов должны быть исключены.
+### Создать функцию которая создает объект на основании двух представленных массивов используя один как ключи, а другой как значения. Не подходящие ключи массивов должны быть исключены.
 ``` 
 Синтаксис: array_combine(keys: array, values: array): Object
 Пример: 
@@ -337,4 +337,51 @@ function array_combine(keys, values) {
 }
 ```
 
+## Mongo
+### Рабочее окружение
+База данных MongoDB содержит коллекции:
+```
+posts - Записи - 
+{
+  "properties": {
+    "_id": { "bsonType": "objectId" },
+    "title": { "bsonType": "string" },
+    "content": { "bsonType": "string" },
+    "author": { "bsonType": "string" },
+    "like": { "bsonType": "int" },
+    "dislike": { "bsonType": "int" }
+  }
+}
+```
+Все команды вы выполняете в mongo shell
+
+### Задание
+### Напишите команды для получения следующих значений:
+#### Выведите 5 записей из коллекции posts пропустив первые 5
+```
+db.posts.find().skip(5).limit(5)
+```
+#### Выведите все записи у которых like больше 100
+```
+db.posts.find({"properties.like":{$gt:100}})
+```
+#### Добавьте новую запись в коллекцию posts
+```
+db.posts.insertOne({"properties":{
+  "_id" : 2,
+  "title" : "Heading",
+  "content" : "Article",
+  "author" : "John",
+  "like" : 38,
+  "dislike" : 50
+}})
+
+```
+#### Выведите список авторов и их общее количество like
+Как то так должно быть, но не получается(
+```
+db.posts.aggregate([
+  {$group : {_id:"$properties", total: {$sum: "$properties.like"}}}
+]).pretty()
+```
 
